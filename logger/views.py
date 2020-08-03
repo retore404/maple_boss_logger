@@ -18,3 +18,15 @@ def signup(request):
 
     context = {'form':form}
     return render(request, 'logger/signup.html', context)
+
+def register(request):
+    if request.method == 'POST':
+        form = BossRegisterForm(request.POST)
+        if form.is_valid():
+            boss_id = form.cleaned_data.get('boss_id').boss_id
+            return redirect('logger:index')
+    else:
+        form = BossRegisterForm()
+
+    context = {'form':form}    
+    return render(request, 'logger/register.html', context)

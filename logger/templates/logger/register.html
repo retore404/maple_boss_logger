@@ -1,0 +1,7 @@
+<h1>登録</h1>
+{{ request.user}}
+<form action="{% url 'logger:register' %}" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Sign Up">
+</form>

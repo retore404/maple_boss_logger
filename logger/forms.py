@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
 from django import forms
+from . import models
+import datetime
+from .models import Boss
 
 class SignUpForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
@@ -31,3 +34,21 @@ class SignUpForm(forms.Form):
         new_user = User.objects.create_user(username = username)
         new_user.set_password(password)
         new_user.save()
+
+class BossRegisterForm(forms.Form):
+    # 入力項目の定義
+    boss_id = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_id")
+    datetime = forms.DateTimeField(
+        label='日時',
+        required=True,
+        widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
+        input_formats=['%Y-%m-%dT%H:%M']
+    )
+
+    # 精査
+    # ボスIDの精査
+    def clean_boss_id(self):
+        boss_id = self.cleaned_data.get('boss_id').boss_id
+        if not Boss.objects.filter(boss_id=boss_id).exists():
+            raise forms.ValidationError('ボスが存在しません')
+        return boss_id
