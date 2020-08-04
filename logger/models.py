@@ -6,6 +6,9 @@ class Boss(models.Model):
     boss_id = models.CharField(max_length=3, unique=True)
     boss_name = models.CharField(max_length=60)
 
+    def __str__(self):
+        return self.boss_name
+
 # 各ユーザーのボス挑戦履歴を管理するモデル
 class UserBossHistory(models.Model):
     user_id = models.ForeignKey(User, to_field='username', on_delete=models.PROTECT)
