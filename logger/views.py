@@ -7,7 +7,7 @@ from .models import UserBossHistory, Boss
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-    return HttpResponse('Index dummy')
+    return render(request, 'logger/index.html')
 
 def signup(request):
     if request.method == 'POST':
