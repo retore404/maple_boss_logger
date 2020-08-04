@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from .forms import *
 from .models import UserBossHistory, Boss
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return HttpResponse('Index dummy')
@@ -20,6 +21,7 @@ def signup(request):
     context = {'form':form}
     return render(request, 'logger/signup.html', context)
 
+@login_required
 def register(request):
     if request.method == 'POST':
         form = BossRegisterForm(request.POST)
