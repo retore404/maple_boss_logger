@@ -45,3 +45,18 @@ def register(request):
 
     context = {'form':form}    
     return render(request, 'logger/register.html', context)
+
+@login_required
+def detail(request):
+    # 閲覧中のユーザ
+    user = request.user
+    
+    # UserBossHistoryから閲覧中のユーザの記録を取得
+    history = UserBossHistory.objects.filter(user_id=user)
+
+    # contextに格納し画面へ
+    context = {
+        'history': history
+    }
+    print(history[0].last_challenged_date)
+    return render(request, 'logger/detail.html', context)
