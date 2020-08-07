@@ -58,5 +58,4 @@ def detail(request):
     context = {
         'history': history
     }
-    print(history[0].last_challenged_date)
     return render(request, 'logger/detail.html', context)
