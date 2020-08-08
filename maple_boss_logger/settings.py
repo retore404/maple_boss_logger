@@ -74,20 +74,6 @@ WSGI_APPLICATION = 'maple_boss_logger.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'maple_boss_logger',
-        'USER': 'django',
-        'PASSWORD': 'password',
-        'HOST': 'db',
-        'POST': 33306,
-        'TEST': {
-            'NAME': 'test_database',
-        }
-    }
-}
-
 # Github Actions自動テスト用の設定
 if os.environ.get('GITHUB_WORKFLOW'):
     DATABASE = {
@@ -98,6 +84,21 @@ if os.environ.get('GITHUB_WORKFLOW'):
             'PASSWORD': 'password',
             'HOST': '127.0.0.1',
             'PORT': '5432',
+        }
+    }
+else:
+    # 通常はこちら
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'maple_boss_logger',
+            'USER': 'django',
+            'PASSWORD': 'password',
+            'HOST': 'db',
+            'POST': 33306,
+            'TEST': {
+                'NAME': 'test_database',
+            }
         }
     }
 
