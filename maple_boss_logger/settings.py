@@ -84,6 +84,9 @@ if os.environ.get('GITHUB_WORKFLOW'):
             'PASSWORD': 'password',
             'HOST': '127.0.0.1',
             'PORT': '5432',
+            'TEST': {
+                'NAME': 'test_database',
+            }
         }
     }
 else:
