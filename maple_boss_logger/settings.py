@@ -76,15 +76,8 @@ WSGI_APPLICATION = 'maple_boss_logger.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'maple_boss_logger',
-        'USER': 'django',
-        'PASSWORD': 'password',
-        'HOST': 'db',
-        'POST': 33306,
-        'TEST': {
-            'NAME': 'test_database',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
