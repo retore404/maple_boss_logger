@@ -15,5 +15,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - docker-compose up -d
 
+before_script:
+  - docker-compose ps 
+  - docker exec -it maple_boss_logger_db bash
+  - psql -c 'CREATE DATABASE maple_boss_logger' -U postgres
+
+
 script:
   - docker-compose run web python manage.py test
