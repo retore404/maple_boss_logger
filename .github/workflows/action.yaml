@@ -11,9 +11,9 @@ jobs:
       db:
         image: postgres:latest
         env:
-          POSTGRES_USER: django
+          POSTGRES_USER: root
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: maple_boss_logger
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck

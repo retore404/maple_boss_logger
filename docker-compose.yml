@@ -16,6 +16,7 @@ services:
    image: postgres:latest
    restart: always
    environment:
+       POSTGRES_DB: postgres
        POSTGRES_USER: root
        POSTGRES_PASSWORD: password
        POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
