@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'maple_boss_logger.wsgi.application'
 if os.environ.get('GITHUB_WORKFLOW'):
     DATABASE = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'maple_boss_logger',
             'USER': 'django',
             'PASSWORD': 'password',
@@ -90,7 +90,7 @@ else:
     # 通常はこちら
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'maple_boss_logger',
             'USER': 'django',
             'PASSWORD': 'password',
