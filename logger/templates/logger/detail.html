@@ -1,0 +1,16 @@
+<h1>記録</h1>
+
+
+
+<table border=1>
+    <tr>
+        <td>ボス名</td>
+        <td>最終挑戦時刻</td>
+    </tr>
+    {% for record in history %}
+    <tr>
+        <td>{{ record.boss_id}}</td>
+        <td>{{ record.last_challenged_date | date:"Y/m/d H:i"}}</td>
+    </tr>    
+    {% endfor %}
+</table>

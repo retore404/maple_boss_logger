@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'logger.apps.LoggerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,9 +76,10 @@ WSGI_APPLICATION = 'maple_boss_logger.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'maple_boss_logger',
-        'USER': 'root',
+        'USER': 'django',
+        'PASSWORD': 'password',
         'HOST': 'db',
         'POST': 33306
     }

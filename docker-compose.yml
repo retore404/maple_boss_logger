@@ -13,14 +13,13 @@ services:
      - db
  db:
    container_name: maple_boss_logger_db
-   image: mysql:5.7
+   image: postgres:latest
    restart: always
    environment:
-     MYSQL_DATABASE: maple_boss_logger
-     MYSQL_USER: root
-     MYSQL_PASSWORD: password
-     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+       POSTGRES_USER: root
+       POSTGRES_PASSWORD: password
+       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
    volumes:
-     - ./mysql:/var/lib/mysql
+     - ./postgres_data:/var/lib/postgresql/data
    ports:
      - 33306:3306
