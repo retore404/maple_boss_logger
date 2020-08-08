@@ -18,7 +18,7 @@ before_install:
 before_script:
   - docker-compose ps 
   - pwd
-  - ll
+  - ls -l
   - docker exec -it maple_boss_logger_db bash .travis/travis_db_initialize.sh
 
 script:
