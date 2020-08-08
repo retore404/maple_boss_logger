@@ -19,7 +19,7 @@ before_script:
   - docker-compose ps 
   - pwd
   - ls -l
-  - docker exec -it maple_boss_logger_db bash .travis/travis_db_initialize.sh
+  - docker exec -it maple_boss_logger_db bash travis_db_initialize.sh
 
 script:
   - docker-compose run web python manage.py test
