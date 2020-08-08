@@ -1,3 +1,8 @@
+# MapleBossLogger
+
+[![Build Status](https://travis-ci.org/retore404/maple_boss_logger.svg?branch=develop)](https://travis-ci.org/retore404/maple_boss_logger)
+![test](https://github.com/retore404/maple_boss_logger/workflows/test/badge.svg)
+
 # Postgres初期セットアップについて
 
 初期構築時に以下の手順を実施する．
@@ -12,6 +17,8 @@
     - ALTER ROLE django SET client_encoding TO 'utf8';
     - ALTER ROLE django SET default_transaction_isolation TO 'read committed';
     - ALTER ROLE django SET timezone TO 'Asia/Tokyo';
+    - ALTER USER django CREATEDB;
+        - TEST用のDBを作成する権限を付与
     - GRANT ALL PRIVILEGES ON DATABASE maple_boss_logger TO django;
 - docker-compose run web python manage.py makemigrations
 - docker-compose run web python manage.py migrate
