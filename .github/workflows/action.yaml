@@ -33,6 +33,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run test
       run: |
-        python manage.py makemigrations
-        python manage.py migrate
-        python manage.py test logger
+        python manage.py makemigrations --settings maple_boss_logger.settings
+        python manage.py migrate --settings maple_boss_logger.settings
+        python manage.py test logger --settings maple_boss_logger.settings
