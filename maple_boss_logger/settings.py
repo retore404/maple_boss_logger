@@ -89,7 +89,7 @@ DATABASES = {
 }
 
 # Github Actions自動テスト用の設定
-if os.environ.get('GITHUB_WORKFLOW'):
+if os.environ.get('GITHUB_WORKFLOW')=='test':
     DATABASE = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
