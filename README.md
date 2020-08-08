@@ -1,3 +1,7 @@
+# MapleBossLogger
+
+[![Build Status](https://travis-ci.org/retore404/maple_boss_logger.svg?branch=develop)](https://travis-ci.org/retore404/maple_boss_logger)
+
 # Postgres初期セットアップについて
 
 初期構築時に以下の手順を実施する．
