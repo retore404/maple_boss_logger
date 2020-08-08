@@ -89,17 +89,17 @@ DATABASES = {
 }
 
 # Github Actions自動テスト用の設定
-#if os.environ.get('GITHUB_ACTIONS'):
-#    DATABASE = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.postgresql',
-#            'NAME': 'github_actions',
-#            'USER': 'postgres',
-#            'PASSWORD': 'postgres',
-#            'HOST': '127.0.0.1',
-#            'PORT': '5432',
-#        }
-#    }
+if os.environ.get('GITHUB_WORKFLOW'):
+    DATABASE = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'maple_boss_logger',
+            'USER': 'django',
+            'PASSWORD': 'password',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
