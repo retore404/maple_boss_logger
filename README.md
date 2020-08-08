@@ -18,3 +18,12 @@
 - docker-compose run web python manage.py createsuperuser
 - docker-compose up
 
+
+# マスタデータの初期構築について
+
+Postgres初期セットアップ実施後に以下のコマンドでマスタデータのインポートが可能．
+
+- docker-compose run web python manage.py loaddata boss.json --app logger
+
+
+
