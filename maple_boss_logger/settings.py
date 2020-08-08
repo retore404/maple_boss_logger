@@ -81,7 +81,10 @@ DATABASES = {
         'USER': 'django',
         'PASSWORD': 'password',
         'HOST': 'db',
-        'POST': 33306
+        'POST': 33306,
+        'TEST': {
+            'NAME': 'test_database',
+        }
     }
 }
 
