@@ -7,8 +7,8 @@ class authMiddleware(MiddlewareMixin):
     def process_response(self, request, response):
         # 以下のすべて条件に当てはまるとき，ログインページにリダイレクトする
         # - ログインしていない
-        # - loggerのログインページ以外のページにアクセスしようとしている
+        # - loggerのログインページかサインアップ以外のページにアクセスしようとしている
         # - adminサイト以外にアクセスしようとしている
-        if not request.user.is_authenticated and request.path != '/logger/login/' and request.path[0:6] != '/admin':
+        if not request.user.is_authenticated and request.path != '/logger/login/' and request.path != '/logger/signup/' and request.path[0:6] != '/admin':
             return HttpResponseRedirect(reverse('logger:login'))
         return response
