@@ -21,7 +21,6 @@ def signup(request):
     context = {'form':form}
     return render(request, 'logger/signup.html', context)
 
-@login_required
 def register(request):
     if request.method == 'POST':
         form = BossRegisterForm(request.POST)
@@ -46,7 +45,6 @@ def register(request):
     context = {'form':form}    
     return render(request, 'logger/register.html', context)
 
-@login_required
 def detail(request):
     if request.user.is_authenticated:
         # 閲覧中のユーザ
