@@ -48,14 +48,17 @@ def register(request):
 
 @login_required
 def detail(request):
-    # 閲覧中のユーザ
-    user = request.user
-    
-    # UserBossHistoryから閲覧中のユーザの記録を取得
-    history = UserBossHistory.objects.filter(user_id=user)
-
-    # contextに格納し画面へ
-    context = {
-        'history': history
-    }
-    return render(request, 'logger/detail.html', context)
+    if request.user.is_authenticated:
+        # 閲覧中のユーザ
+        user = request.user
+        
+        # UserBossHistoryから閲覧中のユーザの記録を取得
+        history = UserBossHistory.objects.filter(user_id=user)
+        
+        # contextに格納し画面へ
+        context = {
+            'history': history
+        }
+        return render(request, 'logger/detail.html', context)
+    else:
+        return redirect('logger:login')
