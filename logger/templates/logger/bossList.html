@@ -1,0 +1,133 @@
+{% load humanize %}
+{% load custom_tags %}
+{% load static %}
+<style>
+    div.main_layout {
+        width: 400px;
+        margin: 0 auto;
+    }
+    table.boss_list {
+        margin: 0 auto;
+        border-color: blueviolet;
+        table-layout: fixed;
+        width: 100%; 
+        border-collapse: collapse;
+    }
+    table.boss_list thead th{
+        border-bottom: 1px solid black;
+    }
+    table.boss_list td, table#boss_list th {
+        padding: 0;
+    } 
+    table.boss_list th {
+        text-align: left;
+    }
+    th#title_name {
+        width: 50%;
+    }
+    th#title_done {
+        width: 10%;
+    }
+    th#title_reward {
+        width: 40%;
+    }
+
+    table#weekly_summary th{
+        text-align: left;
+    }
+    p#current_date {
+        text-align: center;
+        margin: 0;
+    }
+</style>
+<div class="main_layout">
+    <table id="weekly_summary">
+        <caption>
+            <p>週間サマリー</p>
+        </caption>
+        <tbody>
+            <tr>
+                <th>期間</th>
+                <td>{{ start_date }} ~ {{ end_date }}</td>
+            </tr>
+            <tr>
+                <th>合計討伐数</th>
+                <td>{{ weekly_count }}</td>
+            </tr>
+            <tr>
+                <th>合計報酬メル</th>
+                <td>{{ weekly_total_reward|intcomma }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="boss_listLayout">
+        <p id="current_date"><a id="prev_day"> < </a> <span id="current_date">{{ current_date }}</span> <a id="next_day"> > </a></p>
+        <table id="dailyboss_list" class="boss_list">
+            <thead>
+                <th id="title_name">ボス</th>
+                <th id="title_reward">最大報酬額</th>
+                <th id="title_done"></th>
+            </thead>
+            <tbody>
+                {% for boss in bosses %}
+                <tr id="bossid-{{ boss.id }}">
+                    <td>{{ boss.boss_name }}</td>
+                    <td>{{ boss.boss_reward_meso|intcomma }}</td>
+                    <td><input class="done_check" type="checkbox"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+<script>
+    let current_date = new Date('{{ current_date }}')
+    let start_date = new Date('{{ start_date }}')
+    let end_date = new Date('{{ end_date }}')
+    let day_defeated_bosses = {{ day_defeated_bosses|safe }}
+
+    function getDateStr(date){
+        return '' + date.getFullYear()
+        + '-' + ( '00' + (date.getMonth() + 1) ).slice( -2 )
+        + '-' + ( '00' + date.getDate() ).slice( -2 )
+    }
+
+    function checkCurrentDay(){
+        day_defeated_id_list = day_defeated_bosses[getDateStr(current_date)];
+        $('input.done_check').prop('checked', false);
+        for(let i in day_defeated_id_list){
+            console.log(day_defeated_id_list[i])
+            $('tr#bossid-'+day_defeated_id_list[i]+' input.done_check').prop('checked', true);
+        }
+    }
+    function initChangeDateButtons(){
+        if(current_date.getTime() == start_date.getTime()){
+            $('a#prev_day').hide()
+        }else{
+            $('a#prev_day').show()
+        }
+        if(current_date.getTime() == end_date.getTime()){
+            $('a#next_day').hide()
+        }else{
+            $('a#next_day').show()
+        }
+        $('span#current_date').text(getDateStr(current_date))
+        console.log('current_date: ' + $('span#current_date').text())
+    }
+    $(function(){
+        initChangeDateButtons()
+        checkCurrentDay()
+        $('a#prev_day').on('click', function(){
+            current_date.setDate(current_date.getDate() - 1)
+            initChangeDateButtons()
+            checkCurrentDay()
+        });
+        $('a#next_day').on('click', function(){
+            current_date.setDate(current_date.getDate() + 1)
+            initChangeDateButtons()
+            checkCurrentDay()
+        });
+    })
+
+</script>
