@@ -32,8 +32,8 @@ class TestModels(TestCase):
         boss = Boss()
         boss.save()
         dt = datetime.datetime.now()
-        user_boss_history.user_id = user
-        user_boss_history.boss_id = boss
+        user_boss_history.user = user
+        user_boss_history.boss = boss
         user_boss_history.last_challenged_date = dt        
         user_boss_history.save()
         user_boss_history_records = UserBossHistory.objects.all()
