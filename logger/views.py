@@ -27,15 +27,15 @@ def register(request):
         if form.is_valid():
             # 入力値
             user = request.user # 操作中のユーザ情報
-            boss_id = form.cleaned_data.get('boss_id')
+            boss_name = form.cleaned_data.get('boss_name')
             datetime = form.cleaned_data.get('datetime')
             
             # 入力値から対象のBossレコードを特定
-            boss = Boss.objects.filter(boss_id=boss_id)[0]
+            boss = Boss.objects.filter(boss_name=boss_name)[0]
 
             # データを更新（不存在であれば追加）
             obj, created = UserBossHistory.objects.update_or_create(
-                user_id=user, boss_id=boss,
+                user=user, boss=boss,
                 defaults={'last_challenged_date': datetime}
             )
             return redirect('logger:index')
@@ -51,7 +51,7 @@ def detail(request):
         user = request.user
         
         # UserBossHistoryから閲覧中のユーザの記録を取得
-        history = UserBossHistory.objects.filter(user_id=user)
+        history = UserBossHistory.objects.filter(user=user)
         
         # contextに格納し画面へ
         context = {
