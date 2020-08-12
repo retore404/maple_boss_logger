@@ -52,6 +52,21 @@ class TestUrls(TestCase):
         response = client.get(reverse('logger:detail'))
         self.assertRedirects(response, reverse('logger:login'), status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
 
+
+    # bossListページのURLが解決される（ログイン時）
+    def test_boss_list_page_authenticated(self):
+        client = Client()
+        client.force_login(User.objects.create_user('test_user'))
+        response = client.get(reverse('logger:bossList'))
+        self.assertEquals(response.status_code, 200)
+
+    # bossListページのURLからリダイレクトされる（非ログイン時）
+    def test_boss_list_page_not_authenticated(self):
+        client = Client()
+        client.logout()
+        response = client.get(reverse('logger:bossList'))
+        self.assertRedirects(response, reverse('logger:login'), status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
     # loginページのURLが解決される
     def test_login_page(self):
         client = Client()
