@@ -38,11 +38,9 @@ class SignUpForm(forms.Form):
 class BossRegisterForm(forms.Form):
     # 入力項目の定義
     boss_name = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_name")
-    datetime = forms.DateTimeField(
-        label='日時',
-        required=True,
-        widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
-        input_formats=['%Y-%m-%dT%H:%M']
+    datetime = forms.DateField(
+        label='日付',
+        required=True
     )
 
     # 精査
