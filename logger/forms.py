@@ -39,7 +39,7 @@ class SignUpForm(forms.Form):
 class BossRegisterForm(forms.Form):
     # 入力項目の定義
     boss_name = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_name")
-    datetime = forms.DateField(
+    challenged_date = forms.DateField(
         label='日付',
         required=True,
         widget=AdminDateWidget()
