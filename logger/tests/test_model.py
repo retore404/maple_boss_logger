@@ -39,3 +39,35 @@ class TestModels(TestCase):
         user_boss_history_records = UserBossHistory.objects.all()
         self.assertEqual(user_boss_history_records.count(), 1)
 
+    # 同じボス・ユーザに対して2件目のUserBossHistoryを追加したとき，
+    # UpdateInsertではなくInsertされレコードが2件になること
+    # UserBossHistoryを1件追加したとき，登録されているレコードが1件であること
+    def test_has_user_boss_history_two_record(self):
+        # レコードに登録するユーザとボスは同一
+        user = User()
+        user.save()
+        boss = Boss()
+        boss.name = 'BOSS'
+        boss.save()
+        
+        # 1件目の登録
+        user_boss_history1 = UserBossHistory()
+        dt1 = datetime.datetime.now()
+        user_boss_history1.user = user
+        user_boss_history1.boss = boss
+        user_boss_history1.last_challenged_date = dt1      
+        user_boss_history1.save()
+
+        # 2件目の登録
+        user_boss_history2 = UserBossHistory()
+        dt2 = datetime.datetime.now()
+        user_boss_history2.user = user
+        user_boss_history2.boss = boss
+        user_boss_history2.last_challenged_date = dt2       
+        user_boss_history2.save()
+
+        # テーブルにレコードが2件ある
+        user_boss_history_records = UserBossHistory.objects.all()
+        self.assertEqual(user_boss_history_records.count(), 2)
+
+
