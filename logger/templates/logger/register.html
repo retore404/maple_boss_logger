@@ -1,7 +1,29 @@
-<h1>登録</h1>
-{{ request.user }}
-<form action="{% url 'logger:register' %}" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="登録">
-</form>
+{% load static %}<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>RegisterPage</title>
+ 
+    {{ form.media }}
+
+    <!-- for admin widgets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+ 
+    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+    {{ form.media }}
+    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+    <!-- end for admin widgets -->
+ 
+</head>
+<body>
+    <h1>登録</h1>
+    {{ request.user }}
+    <form action="{% url 'logger:register' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="登録">
+    </form>
+</body>
+</html>
