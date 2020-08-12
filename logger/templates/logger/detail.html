@@ -9,8 +9,8 @@
     </tr>
     {% for record in history %}
     <tr>
-        <td>{{ record.boss_id}}</td>
-        <td>{{ record.last_challenged_date | date:"Y/m/d H:i"}}</td>
+        <td>{{ record.boss }}</td>
+        <td>{{ record.challenged_date | date:"Y/m/d" }}</td>
     </tr>    
     {% endfor %}
 </table>
