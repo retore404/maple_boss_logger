@@ -28,16 +28,14 @@ def register(request):
             # 入力値
             user = request.user # 操作中のユーザ情報
             boss_name = form.cleaned_data.get('boss_name')
-            datetime = form.cleaned_data.get('datetime')
+            challenged_date = form.cleaned_data.get('challenged_date')
             
             # 入力値から対象のBossレコードを特定
             boss = Boss.objects.filter(boss_name=boss_name)[0]
 
-            # データを更新（不存在であれば追加）
-            obj, created = UserBossHistory.objects.update_or_create(
-                user=user, boss=boss,
-                defaults={'last_challenged_date': datetime}
-            )
+            # データを追加
+            user_boss_history = UserBossHistory(user=user, boss=boss, challenged_date=challenged_date)
+            user_boss_history.save()
             return redirect('logger:index')
     else:
         form = BossRegisterForm()

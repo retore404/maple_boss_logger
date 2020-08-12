@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # ボス情報を管理するモデル
 class Boss(models.Model):
@@ -12,4 +13,4 @@ class Boss(models.Model):
 class UserBossHistory(models.Model):
     user = models.ForeignKey(User, to_field='username', on_delete=models.PROTECT)
     boss = models.ForeignKey(Boss, to_field='boss_name', on_delete=models.PROTECT)
-    last_challenged_date = models.DateTimeField('date challenged')
+    challenged_date = models.DateField('date challenged', default=datetime.date.today())
