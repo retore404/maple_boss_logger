@@ -3,6 +3,7 @@ from django import forms
 from . import models
 import datetime
 from .models import Boss
+from django.contrib.admin.widgets import AdminDateWidget
 
 class SignUpForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
@@ -40,7 +41,8 @@ class BossRegisterForm(forms.Form):
     boss_name = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_name")
     datetime = forms.DateField(
         label='日付',
-        required=True
+        required=True,
+        widget=AdminDateWidget()
     )
 
     # 精査

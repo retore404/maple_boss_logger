@@ -36,7 +36,7 @@ def register(request):
             # データを更新（不存在であれば追加）
             obj, created = UserBossHistory.objects.update_or_create(
                 user=user, boss=boss,
-                defaults={'last_challenged_date': datetime}
+                defaults={'challenged_date': datetime}
             )
             return redirect('logger:index')
     else:
