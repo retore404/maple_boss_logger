@@ -3,6 +3,7 @@ from django import forms
 from . import models
 import datetime
 from .models import Boss
+from django.contrib.admin.widgets import AdminDateWidget
 
 class SignUpForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
@@ -37,18 +38,17 @@ class SignUpForm(forms.Form):
 
 class BossRegisterForm(forms.Form):
     # 入力項目の定義
-    boss_id = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_id")
-    datetime = forms.DateTimeField(
-        label='日時',
+    boss_name = forms.ModelChoiceField(models.Boss.objects, label='ボス', to_field_name="boss_name")
+    challenged_date = forms.DateField(
+        label='日付',
         required=True,
-        widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
-        input_formats=['%Y-%m-%dT%H:%M']
+        widget=AdminDateWidget()
     )
 
     # 精査
     # ボスIDの精査
-    def clean_boss_id(self):
-        boss_id = self.cleaned_data.get('boss_id').boss_id
-        if not Boss.objects.filter(boss_id=boss_id).exists():
+    def clean_boss(self):
+        boss_name = self.cleaned_data.get('boss_boss_name').boss_name
+        if not Boss.objects.filter(boss_name=boss_name).exists():
             raise forms.ValidationError('ボスが存在しません')
-        return boss_id
+        return boss_name
