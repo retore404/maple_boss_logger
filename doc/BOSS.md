@@ -47,7 +47,7 @@
 | Hデミアン | 70312500 | Weekly |
 | Eルシード | 35112500 | Weekly |
 | Nルシード | 40612500 | Weekly |
-| Hルシード | Unknown | Weekly |
+| Hルシード | 80000000 | Weekly |
 | Nウィル | 46512500 | Weekly |
 | Hウィル | 88200000 | Weekly |
 | Nダスク | 49612500 | Weekly |
