@@ -3,7 +3,7 @@ from django import forms
 from . import models
 import datetime
 from .models import Boss
-from django.contrib.admin.widgets import AdminDateWidget
+import bootstrap_datepicker_plus as datetimepicker
 
 class SignUpForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput)
@@ -42,7 +42,13 @@ class BossRegisterForm(forms.Form):
     challenged_date = forms.DateField(
         label='日付',
         required=True,
-        widget=AdminDateWidget()
+        widget=datetimepicker.DatePickerInput(
+                format='%Y-%m-%d',
+                options={
+                    'locale': 'ja',
+                    'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            )
     )
 
     # 精査
