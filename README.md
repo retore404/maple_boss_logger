@@ -1,6 +1,5 @@
 # MapleBossLogger
 
-[![Build Status](https://travis-ci.org/retore404/maple_boss_logger.svg?branch=develop)](https://travis-ci.org/retore404/maple_boss_logger)
 ![test](https://github.com/retore404/maple_boss_logger/workflows/test/badge.svg)
 
 # DB関連初期構築について
